@@ -32,6 +32,7 @@
 		"cli-handle-unhandled": "^1.1.1",
 		"cli-meow-help": "^4.0.0",
 		"cli-welcome": "^3.0.0",
+		"figlet": "^1.7.0",
 		"get-package-json-file": "^2.0.0",
 		"meow": "^13.2.0"
 	},

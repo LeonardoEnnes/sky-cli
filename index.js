@@ -4,9 +4,15 @@ import cli from './utils/cli.js';
 import init from './utils/init.js';
 import log from './utils/log.js';
 import { httpRequest, monitorAPI, showLogs } from './utils/api.js';
+import chalk from 'chalk';
+import figlet from "figlet";
 
 const { flags, input, showHelp } = cli;
 const { clear, debug } = flags;
+
+console.log(
+	chalk.yellow(figlet.textSync("Welcome to the Sky CLI", { horizontalLayout: "full" }))
+  );
 
 (async () => {
 	await init({ clear });
