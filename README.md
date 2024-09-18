@@ -25,3 +25,20 @@ Sky CLI is a powerful and versatile command-line interface designed for develope
     - **Project Structure Generation:** Quickly generate project structures for popular frameworks or libraries with initial files (e.g., index.js, package.json).
     - **Custom Templates:** Create and store personalized templates to speed up project generation.
     - **Configurable Templates:** Customize templates during creation, such as including/excluding dependencies or configuring linters and test environments.
+
+## How to use the API Interaction
+
+- Requests: 
+    ```
+    node index.js request --url=YOUR-API --method=GET
+    ```
+
+- Monitoring
+    ```
+    node index.js monitor --url=YOUR-API --interval=10000
+    ```
+
+- Logs
+    ```
+    node index.js logs
+    ```
