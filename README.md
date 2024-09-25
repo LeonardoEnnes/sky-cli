@@ -56,3 +56,9 @@ Sky CLI is a powerful and versatile command-line interface designed for develope
     ```
     node index.js write-file --file=logs/file.txt --content="hello world"
     ```
+
+- Delete files in any directory:
+
+    ```
+    node index.js delete-file --file=logs/file.txt
+    ```
