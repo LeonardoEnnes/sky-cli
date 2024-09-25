@@ -20,3 +20,13 @@ export const writeFile = (filePath, content) => {
     process.exit(1);
   }
 };
+
+export const deleteFile = (filePath) => {
+  try {
+    fs.unlinkSync(path.resolve(filePath));
+    console.log('File deleted successfully');
+  } catch (error) {
+    console.error(`Error deleting file: ${error.message}`);
+    process.exit(1);
+  }
+};
