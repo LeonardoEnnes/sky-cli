@@ -11,3 +11,12 @@ export const readFile = (filePath) => {
   }
 };
 
+export const writeFile = (filePath, content) => {
+  try {
+    fs.writeFileSync(path.resolve(filePath), content, 'utf8');
+    console.log('File written successfully');
+  } catch (error) {
+    console.error(`Error writing file: ${error.message}`);
+    process.exit(1);
+  }
+};

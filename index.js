@@ -4,7 +4,7 @@ import cli from './utils/cli.js';
 import init from './utils/init.js';
 import log from './utils/log.js';
 import { httpRequest, monitorAPI, showLogs } from './utils/api.js';
-import { readFile } from './utils/fileManager.js';
+import { readFile, writeFile } from './utils/fileManager.js';
 import chalk from 'chalk';
 import figlet from "figlet";
 
@@ -48,9 +48,13 @@ console.log(
 		await monitorAPI(url, interval);
 	} else if (input.includes('logs')) {
 		showLogs();
-	} else if (input.includes('read-file')) { // read file (new feature)
+	} else if (input.includes('read-file')) { 
 		const filePath = flags.file;
 		const content = readFile(filePath);
 		console.log(content);
-	} 
+	} else if (input.includes('write-file')) { // function to write files (check it later to do better maybe)
+		const filePath = flags.file;
+		const content = flags.content;
+		writeFile(filePath, content);
+	}
 })();
