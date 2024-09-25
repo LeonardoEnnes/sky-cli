@@ -46,6 +46,13 @@ Sky CLI is a powerful and versatile command-line interface designed for develope
 ## How to use the File Management
 
 - Read Files in any directory: 
+
     ```
     node index.js read-file --file=logs/file.extension
+    ```
+
+- Write files in any directory:
+
+    ```
+    node index.js write-file --file=logs/file.txt --content="hello world"
     ```
