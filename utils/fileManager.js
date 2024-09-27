@@ -64,12 +64,6 @@ export const compareFiles = (filePath1, filePath2) => {
 
     const differences = diffLines(file1Content, file2Content);
 
-    differences.forEach((part) => {
-      const color = part.added ? chalk.green :
-                    part.removed ? chalk.red : chalk.grey;
-      process.stderr.write(color(part.value));
-    });
-
     return differences;
   } catch (error) {
     console.error(`Error comparing files: ${error.message}`);

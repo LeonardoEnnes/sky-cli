@@ -67,6 +67,16 @@ console.log(
 		const filePath1 = flags.file1;
 		const filePath2 = flags.file2;
 		const differences = compareFiles(filePath1, filePath2);
+
+		// Print legend (make it better later)
+		console.log('---------------------------------------'); 
+		console.log(chalk.bold.underline('Legend:'));
+		console.log(chalk.green('  + Added lines'));
+		console.log(chalk.red('  - Removed lines'));
+		console.log(chalk.grey('  = Unchanged lines'));
+		console.log(); 
+		console.log('---------------------------------------'); 
+
 		differences.forEach((part) => {
 			const color = part.added ? chalk.green :
 			              part.removed ? chalk.red : chalk.grey;
