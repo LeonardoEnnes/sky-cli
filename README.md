@@ -68,3 +68,8 @@ Sky CLI is a powerful and versatile command-line interface designed for develope
     ```
     node index.js list-files --dir=path/to/directory
     ```
+- Compare files in any directory:
+
+    ```
+    node index.js compare-files --file1=path/to/file --file2=path/to/file 
+    ```
