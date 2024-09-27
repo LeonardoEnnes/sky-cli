@@ -36,6 +36,8 @@
 		"diff": "^7.0.0",
 		"figlet": "^1.7.0",
 		"get-package-json-file": "^2.0.0",
+		"inquirer": "^9.3.6",
+		"inquirer-autocomplete-prompt": "^3.0.1",
 		"meow": "^13.2.0"
 	},
 	"devDependencies": {
