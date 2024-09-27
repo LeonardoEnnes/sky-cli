@@ -4,7 +4,7 @@ import cli from './utils/cli.js';
 import init from './utils/init.js';
 import log from './utils/log.js';
 import { httpRequest, monitorAPI, showLogs } from './utils/api.js';
-import { readFile, writeFile, deleteFile, listFilesAndFolders } from './utils/fileManager.js';
+import { readFile, writeFile, deleteFile, listFilesAndFolders, compareFiles } from './utils/fileManager.js';
 import chalk from 'chalk';
 import figlet from "figlet";
 
@@ -63,5 +63,14 @@ console.log(
 		const dirPath = flags.dir;
 		const items = listFilesAndFolders(dirPath);
 		console.log(items);
+	}else if (input.includes('compare-files')) { // function to compare files (make it better later)
+		const filePath1 = flags.file1;
+		const filePath2 = flags.file2;
+		const differences = compareFiles(filePath1, filePath2);
+		differences.forEach((part) => {
+			const color = part.added ? chalk.green :
+			              part.removed ? chalk.red : chalk.grey;
+			process.stderr.write(color(part.value));
+		});
 	}
 })();
