@@ -4,7 +4,7 @@ import cli from './utils/cli.js';
 import init from './utils/init.js';
 import log from './utils/log.js';
 import { httpRequest, monitorAPI, showLogs } from './utils/api.js';
-import { readFile, writeFile, deleteFile } from './utils/fileManager.js';
+import { readFile, writeFile, deleteFile, listFilesAndFolders } from './utils/fileManager.js';
 import chalk from 'chalk';
 import figlet from "figlet";
 
@@ -59,5 +59,9 @@ console.log(
 	} else if (input.includes('delete-file')) { // function to delete any file
 		const filePath = flags.file;
 		deleteFile(filePath);
-	} 
+	} else if (input.includes('list-files')) { // function to list files and folders
+		const dirPath = flags.dir;
+		const items = listFilesAndFolders(dirPath);
+		console.log(items);
+	}
 })();

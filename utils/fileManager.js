@@ -30,3 +30,24 @@ export const deleteFile = (filePath) => {
     process.exit(1);
   }
 };
+
+// list files and directories 
+
+export const listFilesAndFolders = (dirPath) => {
+  try {
+    const items = fs.readdirSync(path.resolve(dirPath));
+    const result = items.map(item => {
+      const fullPath = path.join(dirPath, item);
+      const stats = fs.statSync(fullPath);
+      return {
+        name: item,
+        isFile: stats.isFile(),
+        isDirectory: stats.isDirectory()
+      };
+    });
+    return result;
+  } catch (error) {
+    console.error(`Error listing files and folders: ${error.message}`);
+    process.exit(1);
+  }
+};
