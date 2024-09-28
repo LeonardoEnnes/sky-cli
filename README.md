@@ -38,6 +38,29 @@ npm install
 ```
 
 After that you are ready to go.
+
+## How to use the CLI
+
+**Step 1:** Go to the repository folder open the terminal and run:
+```
+node index.js
+```
+
+**Step 2:** Select a command from the list. You will be prompted with an autocomplete list of commands. Start typing the command you want to execute and select it from the list. The available commands are:
+- request
+- monitor
+- logs
+- read-file
+- write-file
+- delete-file
+- list-files
+- compare-files
+
+**Step 3:** After selecting a command, you will be prompted to enter the required parameters for that command. For example:
+- For read-file, you will need to provide the path to the --file.
+
+ if you want to use an command without selecting it from the autocomplete list you can type the command and press enter to execute it. Check below how to do this.
+
 ## How to use the API Interaction
 
 - Requests: 
