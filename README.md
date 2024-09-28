@@ -26,6 +26,18 @@ Sky CLI is a powerful and versatile command-line interface designed for develope
     - **Custom Templates:** Create and store personalized templates to speed up project generation.
     - **Configurable Templates:** Customize templates during creation, such as including/excluding dependencies or configuring linters and test environments.
 
+## How to install the CLI
+**Step 1:** Clone this repository
+```
+git clone https://github.com/LeonardoEnnes/sky-cli.git
+```
+
+**Step 2:** Install the dependencies
+```
+npm install
+```
+
+After that you are ready to go.
 ## How to use the API Interaction
 
 - Requests: 
