@@ -1,6 +1,19 @@
 # sky-cli
 Sky CLI is a powerful and versatile command-line interface designed for developers who need to streamline their workflow. It provides a comprehensive suite of tools for managing APIs, handling file operations, manipulating data, and using templates to simplify repetitive tasks. Whether you’re automating file operations, making API requests, or processing data, sky-cli has you covered!
 
+## Table of Contents
+1. [Features](#-features)
+    - [File Management](#file-management)
+    - [API Interaction](#api-interaction)
+    - [Data Manipulation](#data-manipulation)
+    - [Template Creation](#template-creation)
+2. [How to Install the CLI](#how-to-install-the-cli)
+3. [How to Use the CLI](#how-to-use-the-cli)
+4. [How to Use the convert-format Command](#how-to-use-the-convert-format-command)
+5. [How to Use the search Command](#how-to-use-the-search-command)
+6. [Comands without autocomplete](#comands-without-autocomplete)
+
+
 ### 🚀 Features
 1. #### File Management
     - **File and Folder Listing:** Interactively list files and directories with filters for file type, size, or creation date.
@@ -106,9 +119,13 @@ The convert-format command is used to convert the format of a file. You can conv
 ``` 
 
 ----
-####  **if you want to use an command without selecting it from the autocomplete list you can type the command and press enter to execute it. Check how to do this below.**
 
-## How to use the API Interaction
+## Comands without autocomplete 
+if you want to use an command without selecting it from the autocomplete list you can type the command and press enter to execute it. 
+
+**Check how to do this below.**
+
+### How to use the API Interaction
 
 - Requests: 
     ```
@@ -125,7 +142,7 @@ The convert-format command is used to convert the format of a file. You can conv
     node index.js logs
     ```
 
-## How to use the File Management
+### How to use the File Management
 
 - Read Files in any directory: 
 
