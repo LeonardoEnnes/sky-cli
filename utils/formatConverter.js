@@ -11,13 +11,18 @@ export async function convertFormat(inputFile, outputFile, inputFormat, outputFo
 	let data;
 
 	if (inputFormat === 'json') {
-		data = JSON.parse(inputData).employees;
+		data = JSON.parse(inputData);
 	} else if (inputFormat === 'xml') {
 		data = (await parseStringPromise(inputData)).employees.employee;
 	} else if (inputFormat === 'csv') {
 		data = await csvParseAsync(inputData, { columns: true });
 	} else {
 		throw new Error('Unsupported input format');
+	}
+
+	// Ensure data is an array
+	if (!Array.isArray(data)) {
+		data = [data];
 	}
 
 	if (filter) {
@@ -41,7 +46,7 @@ export async function convertFormat(inputFile, outputFile, inputFormat, outputFo
 	// Convert to output format
 	let outputData;
 	if (outputFormat === 'json') {
-		outputData = JSON.stringify({ employees: data }, null, 2);
+		outputData = JSON.stringify(data, null, 2);
 	} else if (outputFormat === 'xml') {
 		const builder = new Builder();
 		outputData = builder.buildObject({ employees: { employee: data } });
