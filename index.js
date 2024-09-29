@@ -5,6 +5,7 @@ import init from './utils/init.js';
 import log from './utils/log.js';
 import { httpRequest, monitorAPI, showLogs } from './utils/api.js';
 import { readFile, writeFile, deleteFile, listFilesAndFolders, compareFiles } from './utils/fileManager.js';
+import { searchFiles } from './utils/search.js';
 import chalk from 'chalk';
 import figlet from "figlet";
 import inquirer from 'inquirer';
@@ -30,7 +31,8 @@ const commands = [
 	{ name: 'write-file', params: ['--file', '--content'] },
 	{ name: 'delete-file', params: ['--file'] },
 	{ name: 'list-files', params: ['--dir'] },
-	{ name: 'compare-files', params: ['--file1', '--file2'] }
+	{ name: 'compare-files', params: ['--file1', '--file2'] },
+	{ name: 'search', params: ['--dir', '--regex', '--created-before', '--created-after', '--modified-before', '--modified-after'] }
 ];
 
 (async () => {
@@ -142,5 +144,15 @@ const commands = [
 			              part.removed ? chalk.red : chalk.grey;
 			process.stderr.write(color(part.value));
 		});
+	}else if (cmd === 'search') {
+		const dirPath = cmdFlags.dir;
+		const regex = cmdFlags.regex ? new RegExp(cmdFlags.regex) : null;
+		const createdBefore = cmdFlags['created-before'] ? new Date(cmdFlags['created-before']) : null;
+		const createdAfter = cmdFlags['created-after'] ? new Date(cmdFlags['created-after']) : null;
+		const modifiedBefore = cmdFlags['modified-before'] ? new Date(cmdFlags['modified-before']) : null;
+		const modifiedAfter = cmdFlags['modified-after'] ? new Date(cmdFlags['modified-after']) : null;
+
+		const searchResults = searchFiles(dirPath, regex, createdBefore, createdAfter, modifiedBefore, modifiedAfter);
+		console.log('Search Results:', searchResults);
 	}
 })();
