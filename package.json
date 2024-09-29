@@ -33,12 +33,14 @@
 		"cli-meow-help": "^4.0.0",
 		"cli-welcome": "^3.0.0",
 		"commander": "^12.1.0",
+		"csv": "^6.3.10",
 		"diff": "^7.0.0",
 		"figlet": "^1.7.0",
 		"get-package-json-file": "^2.0.0",
 		"inquirer": "^9.3.6",
 		"inquirer-autocomplete-prompt": "^3.0.1",
-		"meow": "^13.2.0"
+		"meow": "^13.2.0",
+		"xml2js": "^0.6.2"
 	},
 	"devDependencies": {
 		"prettier": "^3.3.3"
