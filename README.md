@@ -59,6 +59,24 @@ node index.js
 **Step 3:** After selecting a command, you will be prompted to enter the required parameters for that command. For example:
 - For read-file, you will need to provide the path to the --file.
 
+## How to use the convert-format command
+The convert-format command is used to convert the format of a file. You can convert the format of a file from json to xml, csv, or vice versa. You can also filter and transform the data.
+
+- Select the convert-format command from the autocomplete list.
+```
+   ? What do you want to do? convert-format
+``` 
+
+- Provide Parameters:
+```
+? Enter the input file path: ./input.json
+? Enter the output file path: ./output.xml
+? Enter the input format: json
+? Enter the output format: xml
+? Enter the filter: "key=value"
+? Enter the transform: "key=toUpperCase"
+```
+
  ## How to use the search command
  The search command is used to search for words in files in a directory that match a specific regex pattern. You can also filter the search by creation and modification date.
 
