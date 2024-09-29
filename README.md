@@ -55,6 +55,8 @@ node index.js
 - delete-file
 - list-files
 - compare-files
+- search
+- convert-format
 
 **Step 3:** After selecting a command, you will be prompted to enter the required parameters for that command. For example:
 - For read-file, you will need to provide the path to the --file.

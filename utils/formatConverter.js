@@ -10,7 +10,6 @@ export async function convertFormat(inputFile, outputFile, inputFormat, outputFo
 	const inputData = fs.readFileSync(inputFile, 'utf8');
 	let data;
 
-	// Parse input data
 	if (inputFormat === 'json') {
 		data = JSON.parse(inputData).employees;
 	} else if (inputFormat === 'xml') {
@@ -21,14 +20,12 @@ export async function convertFormat(inputFile, outputFile, inputFormat, outputFo
 		throw new Error('Unsupported input format');
 	}
 
-	// Apply filter if provided
 	if (filter) {
 		data = data.filter(item => {
 			return Object.keys(filter).every(key => item[key] === filter[key]);
 		});
 	}
 
-	// Apply transform if provided
 	if (transform) {
 		data = data.map(item => {
 			const transformedItem = { ...item };
@@ -36,7 +33,6 @@ export async function convertFormat(inputFile, outputFile, inputFormat, outputFo
 				if (typeof transform[key] === 'string' && transform[key] === 'toUpperCase') {
 					transformedItem[key] = item[key].toUpperCase();
 				}
-				// Add more transformations as needed
 			});
 			return transformedItem;
 		});
@@ -55,6 +51,5 @@ export async function convertFormat(inputFile, outputFile, inputFormat, outputFo
 		throw new Error('Unsupported output format');
 	}
 
-	// Write to output file
 	fs.writeFileSync(outputFile, outputData, 'utf8');
 }
