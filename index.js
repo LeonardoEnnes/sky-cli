@@ -6,6 +6,7 @@ import log from './utils/log.js';
 import { httpRequest, monitorAPI, showLogs } from './utils/api.js';
 import { readFile, writeFile, deleteFile, listFilesAndFolders, compareFiles } from './utils/fileManager.js';
 import { searchFiles } from './utils/search.js';
+import { convertFormat } from './utils/formatConverter.js';
 import chalk from 'chalk';
 import figlet from "figlet";
 import inquirer from 'inquirer';
@@ -32,7 +33,8 @@ const commands = [
 	{ name: 'delete-file', params: ['--file'] },
 	{ name: 'list-files', params: ['--dir'] },
 	{ name: 'compare-files', params: ['--file1', '--file2'] },
-	{ name: 'search', params: ['--dir', '--regex', '--created-before', '--created-after', '--modified-before', '--modified-after'] }
+	{ name: 'search', params: ['--dir', '--regex', '--created-before', '--created-after', '--modified-before', '--modified-after'] },
+	{ name: 'convert-format', params: ['--input-file', '--output-file', '--input-format', '--output-format', '--filter', '--transform'] }
 ];
 
 (async () => {
@@ -154,5 +156,30 @@ const commands = [
 
 		const searchResults = searchFiles(dirPath, regex, createdBefore, createdAfter, modifiedBefore, modifiedAfter);
 		console.log('Search Results:', searchResults);
+	}else if (cmd === 'convert-format') {		// converting formats of files 
+		const inputFile = cmdFlags['input-file'];
+		const outputFile = cmdFlags['output-file'];
+		const inputFormat = cmdFlags['input-format'];
+		const outputFormat = cmdFlags['output-format'];
+		let filter = null;
+		let transform = null;
+
+		if (cmdFlags['filter']) {
+			filter = cmdFlags['filter'].split(',').reduce((acc, pair) => {
+				const [key, value] = pair.split(':');
+				acc[key] = value;
+				return acc;
+			}, {});
+		}
+
+		if (cmdFlags['transform']) {
+			transform = cmdFlags['transform'].split(',').reduce((acc, pair) => {
+				const [key, value] = pair.split(':');
+				acc[key] = value;
+				return acc;
+			}, {});
+		}
+
+		await convertFormat(inputFile, outputFile, inputFormat, outputFormat, filter, transform);
 	}
 })();
