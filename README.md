@@ -59,7 +59,34 @@ node index.js
 **Step 3:** After selecting a command, you will be prompted to enter the required parameters for that command. For example:
 - For read-file, you will need to provide the path to the --file.
 
- if you want to use an command without selecting it from the autocomplete list you can type the command and press enter to execute it. Check below how to do this.
+ ## How to use the search command
+ The search command is used to search for words in files in a directory that match a specific regex pattern. You can also filter the search by creation and modification date.
+
+- Select the search command from the autocomplete list.
+```
+   ? What do you want to do? search
+``` 
+
+- Provide Parameters:
+```
+? Enter the directory path: ./
+? Enter the regex pattern: "example"
+? Enter the creation date before: 2024-01-01
+? Enter the creation date after: 2024-01-31
+? Enter the modification date before: 2024-01-01
+? Enter the modification date after: 2024-01-31
+```
+
+- View the results:
+```
+   Results:
+   - ./file1.txt
+   - ./file2.txt
+   - ./file3.txt
+``` 
+
+----
+####  **if you want to use an command without selecting it from the autocomplete list you can type the command and press enter to execute it. Check how to do this below.**
 
 ## How to use the API Interaction
 
