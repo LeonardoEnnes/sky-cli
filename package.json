@@ -39,6 +39,7 @@
 		"get-package-json-file": "^2.0.0",
 		"inquirer": "^9.3.6",
 		"inquirer-autocomplete-prompt": "^3.0.1",
+		"json2csv": "^6.0.0-alpha.2",
 		"meow": "^13.2.0",
 		"xml2js": "^0.6.2"
 	},
