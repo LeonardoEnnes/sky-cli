@@ -1,60 +1,45 @@
-import fs from 'fs';
-import { parseStringPromise, Builder } from 'xml2js';
-import { parse as csvParse, stringify as csvStringify } from 'csv';
-import { promisify } from 'util';
+// @desc: the filter and transform functions were removed from the code due to errors during the execution
+// @desc: filter and transform functions will be implemented later
 
-const csvParseAsync = promisify(csvParse);
-const csvStringifyAsync = promisify(csvStringify);
+import { parse as json2csv } from 'json2csv';
+import { parseStringPromise as xml2js, Builder as js2xml } from 'xml2js';
+import { promises as fs } from 'fs';
 
-export async function convertFormat(inputFile, outputFile, inputFormat, outputFormat, filter, transform) {
-	const inputData = fs.readFileSync(inputFile, 'utf8');
-	let data;
+export async function convertFormat(inputFile, outputFile, inputFormat, outputFormat) {
+    const inputData = await fs.readFile(inputFile, 'utf8');
+    let data;
 
-	if (inputFormat === 'json') {
-		data = JSON.parse(inputData);
-	} else if (inputFormat === 'xml') {
-		data = (await parseStringPromise(inputData)).employees.employee;
-	} else if (inputFormat === 'csv') {
-		data = await csvParseAsync(inputData, { columns: true });
-	} else {
-		throw new Error('Unsupported input format');
-	}
+    // Parse input data
+    if (inputFormat === 'json') {
+        data = JSON.parse(inputData);
+    } else if (inputFormat === 'xml') {
+        const parsedXml = await xml2js(inputData);
+        data = parsedXml.root && Array.isArray(parsedXml.root.item) ? parsedXml.root.item : parsedXml.root;
+    } else if (inputFormat === 'csv') {
+        data = await csv().fromString(inputData);
+    } else {
+        throw new Error('Unsupported input format');
+    }
 
-	// Ensure data is an array
-	if (!Array.isArray(data)) {
-		data = [data];
-	}
+    // Ensure data is an array for consistent processing
+    if (!Array.isArray(data)) {
+        data = [data]; // Convert to array if it's not already an array
+    }
 
-	if (filter) {
-		data = data.filter(item => {
-			return Object.keys(filter).every(key => item[key] === filter[key]);
-		});
-	}
+    let outputData;
 
-	if (transform) {
-		data = data.map(item => {
-			const transformedItem = { ...item };
-			Object.keys(transform).forEach(key => {
-				if (typeof transform[key] === 'string' && transform[key] === 'toUpperCase') {
-					transformedItem[key] = item[key].toUpperCase();
-				}
-			});
-			return transformedItem;
-		});
-	}
+    // Convert to output format
+    if (outputFormat === 'json') {
+        outputData = JSON.stringify(data, null, 2);
+    } else if (outputFormat === 'xml') {
+        const builder = new js2xml();
+        outputData = builder.buildObject({ root: { item: data } });
+    } else if (outputFormat === 'csv') {
+        outputData = json2csv(data);
+    } else {
+        throw new Error('Unsupported output format');
+    }
 
-	// Convert to output format
-	let outputData;
-	if (outputFormat === 'json') {
-		outputData = JSON.stringify(data, null, 2);
-	} else if (outputFormat === 'xml') {
-		const builder = new Builder();
-		outputData = builder.buildObject({ employees: { employee: data } });
-	} else if (outputFormat === 'csv') {
-		outputData = await csvStringifyAsync(data, { header: true });
-	} else {
-		throw new Error('Unsupported output format');
-	}
-
-	fs.writeFileSync(outputFile, outputData, 'utf8');
+    // Write to output file
+    await fs.writeFile(outputFile, outputData, 'utf8');
 }

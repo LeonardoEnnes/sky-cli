@@ -34,7 +34,7 @@ const commands = [
 	{ name: 'list-files', params: ['--dir'] },
 	{ name: 'compare-files', params: ['--file1', '--file2'] },
 	{ name: 'search', params: ['--dir', '--regex', '--created-before', '--created-after', '--modified-before', '--modified-after'] },
-	{ name: 'convert-format', params: ['--input-file', '--output-file', '--input-format', '--output-format', '--filter', '--transform'] }
+	{ name: 'convert-format', params: ['--input-file', '--output-file', '--input-format', '--output-format'] }
 ];
 
 (async () => {
@@ -156,30 +156,12 @@ const commands = [
 
 		const searchResults = searchFiles(dirPath, regex, createdBefore, createdAfter, modifiedBefore, modifiedAfter);
 		console.log('Search Results:', searchResults);
-	}else if (cmd === 'convert-format') {		// converting formats of files 
-		const inputFile = cmdFlags['input-file'];
-		const outputFile = cmdFlags['output-file'];
-		const inputFormat = cmdFlags['input-format'];
-		const outputFormat = cmdFlags['output-format'];
-		let filter = null;
-		let transform = null;
+	}else if (cmd === 'convert-format') {  // function to convert file formats (implement filter and transform later)
+        const inputFile = cmdFlags['input-file'];
+        const outputFile = cmdFlags['output-file'];
+        const inputFormat = cmdFlags['input-format'];
+        const outputFormat = cmdFlags['output-format'];
 
-		if (cmdFlags['filter']) {
-			filter = cmdFlags['filter'].split(',').reduce((acc, pair) => {
-				const [key, value] = pair.split(':');
-				acc[key] = value;
-				return acc;
-			}, {});
-		}
-
-		if (cmdFlags['transform']) {
-			transform = cmdFlags['transform'].split(',').reduce((acc, pair) => {
-				const [key, value] = pair.split(':');
-				acc[key] = value;
-				return acc;
-			}, {});
-		}
-
-		await convertFormat(inputFile, outputFile, inputFormat, outputFormat, filter, transform);
-	}
+        await convertFormat(inputFile, outputFile, inputFormat, outputFormat);
+    }
 })();
