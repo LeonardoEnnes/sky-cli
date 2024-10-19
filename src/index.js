@@ -14,10 +14,11 @@ import autocomplete from 'inquirer-autocomplete-prompt';
 inquirer.registerPrompt('autocomplete', autocomplete);
 
 class Command {
-    constructor(name, params, execute) {
+    constructor(name, params, execute, description) {
         this.name = name;
         this.params = params;
         this.execute = execute;
+		this.description = description; 
     }
 }
 
