@@ -24,21 +24,31 @@ class Command {
 class CommandHandler {
     constructor() {
         this.commands = [
-            new Command('help', [], () => cli.showHelp(0)),
-            new Command('request', ['--method', '--url', '--headers', '--data'], this.handleRequest.bind(this)),
-            new Command('monitor', ['--url', '--interval'], this.handleMonitor.bind(this)),
-            new Command('logs', [], showLogs),
-            new Command('read-file', ['--file'], this.handleReadFile.bind(this)),
-            new Command('write-file', ['--file', '--content'], this.handleWriteFile.bind(this)),
-            new Command('delete-file', ['--file'], this.handleDeleteFile.bind(this)),
-            new Command('list-files', ['--dir'], this.handleListFiles.bind(this)),
-            new Command('compare-files', ['--file1', '--file2'], this.handleCompareFiles.bind(this)),
-            new Command('search', ['--dir', '--regex', '--created-before', '--created-after', '--modified-before', '--modified-after'], this.handleSearch.bind(this)),
-            new Command('convert-format', ['--input-file', '--output-file', '--input-format', '--output-format'], this.handleConvertFormat.bind(this))
+            new Command('help', [], this.showHelp.bind(this), 'Display help information about available commands.'),
+            new Command('request', ['--method', '--url', '--headers', '--data'], this.handleRequest.bind(this), 'Make an HTTP request.'),
+            new Command('monitor', ['--url', '--interval'], this.handleMonitor.bind(this), 'Monitor a URL at a specified interval.'),
+            new Command('logs', [], showLogs, 'Show logs of previous operations.'),
+            new Command('read-file', ['--file'], this.handleReadFile.bind(this), 'Read the content of a file.'),
+            new Command('write-file', ['--file', '--content'], this.handleWriteFile.bind(this), 'Write content to a file.'),
+            new Command('delete-file', ['--file'], this.handleDeleteFile.bind(this), 'Delete a specified file.'),
+            new Command('list-files', ['--dir'], this.handleListFiles.bind(this), 'List files and folders in a directory.'),
+            new Command('compare-files', ['--file1', '--file2'], this.handleCompareFiles.bind(this), 'Compare two files and show differences.'),
+            new Command('search', ['--dir', '--regex', '--created-before', '--created-after', '--modified-before', '--modified-after'], this.handleSearch.bind(this), 'Search for files matching criteria.'),
+            new Command('convert-format', ['--input-file', '--output-file', '--input-format', '--output-format'], this.handleConvertFormat.bind(this), 'Convert a file from one format to another.')
         ];
 
         // Vinculando o método printDifferences
         this.printDifferences = this.printDifferences.bind(this);
+    }
+
+	showHelp() {
+        console.log('Available Commands:');
+        this.commands.forEach(command => {
+            console.log(`  ${command.name}: ${command.description}`);
+            if (command.params.length > 0) {
+                console.log(`    Parameters: ${command.params.join(', ')}`);
+            }
+        });
     }
 
     async handleRequest(params) {

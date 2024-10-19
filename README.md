@@ -11,7 +11,6 @@ Sky CLI is a powerful and versatile command-line interface designed for develope
 3. [How to Use the CLI](#how-to-use-the-cli)
 4. [How to Use the convert-format Command](#how-to-use-the-convert-format-command)
 5. [How to Use the search Command](#how-to-use-the-search-command)
-6. [Comands without autocomplete](#comands-without-autocomplete)
 
 
 ### 🚀 Features
