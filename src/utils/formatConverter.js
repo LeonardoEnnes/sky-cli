@@ -5,41 +5,42 @@ import { parse as json2csv } from 'json2csv';
 import { parseStringPromise as xml2js, Builder as js2xml } from 'xml2js';
 import { promises as fs } from 'fs';
 
-export async function convertFormat(inputFile, outputFile, inputFormat, outputFormat) {
-    const inputData = await fs.readFile(inputFile, 'utf8');
-    let data;
-
-    // Parse input data
-    if (inputFormat === 'json') {
-        data = JSON.parse(inputData);
-    } else if (inputFormat === 'xml') {
-        const parsedXml = await xml2js(inputData);
-        data = parsedXml.root && Array.isArray(parsedXml.root.item) ? parsedXml.root.item : parsedXml.root;
-    } else if (inputFormat === 'csv') {
-        data = await csv().fromString(inputData);
-    } else {
-        throw new Error('Unsupported input format');
+class FormatConverter {
+    async convert(inputFile, outputFile, inputFormat, outputFormat) {
+        const inputData = await fs.readFile(inputFile, 'utf8');
+        let data = this.parseInputData(inputData, inputFormat);
+        let outputData = this.convertOutputFormat(data, outputFormat);
+        await fs.writeFile(outputFile, outputData, 'utf8');
     }
 
-    // Ensure data is an array for consistent processing
-    if (!Array.isArray(data)) {
-        data = [data]; // Convert to array if it's not already an array
+    parseInputData(inputData, inputFormat) {
+        if (inputFormat === 'json') {
+            return JSON.parse(inputData);
+        } else if (inputFormat === 'xml') {
+            return xml2js(inputData).then(parsedXml => parsedXml.root && Array.isArray(parsedXml.root.item) ? parsedXml.root.item : parsedXml.root);
+        } else if (inputFormat === 'csv') {
+            return csv().fromString(inputData);
+        } else {
+            throw new Error('Unsupported input format');
+        }
     }
 
-    let outputData;
+    convertOutputFormat(data, outputFormat) {
+        if (!Array.isArray(data)) {
+            data = [data];
+        }
 
-    // Convert to output format
-    if (outputFormat === 'json') {
-        outputData = JSON.stringify(data, null, 2);
-    } else if (outputFormat === 'xml') {
-        const builder = new js2xml();
-        outputData = builder.buildObject({ root: { item: data } });
-    } else if (outputFormat === 'csv') {
-        outputData = json2csv(data);
-    } else {
-        throw new Error('Unsupported output format');
+        if (outputFormat === 'json') {
+            return JSON.stringify(data, null, 2);
+        } else if (outputFormat === 'xml') {
+            const builder = new js2xml();
+            return builder.buildObject({ root: { item: data } });
+        } else if (outputFormat === 'csv') {
+            return json2csv(data);
+        } else {
+            throw new Error('Unsupported output format');
+        }
     }
-
-    // Write to output file
-    await fs.writeFile(outputFile, outputData, 'utf8');
 }
+
+export default FormatConverter;

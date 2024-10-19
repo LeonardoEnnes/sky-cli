@@ -1,48 +1,40 @@
 import fs from 'fs';
 import path from 'path';
 
-export const searchFiles = (dir, regex, createdBefore, createdAfter, modifiedBefore, modifiedAfter) => {
-    const searchResults = [];
+class FileSearcher {
+    constructor(basePath) {
+        this.basePath = basePath;
+    }
 
-    const searchDirectory = (dir) => {
-        const files = fs.readdirSync(dir);
-        files.forEach(file => {
-            const filePath = path.join(dir, file);
-            const stats = fs.statSync(filePath);
+    search(regex, createdBefore, createdAfter, modifiedBefore, modifiedAfter) {
+        const results = [];
+        if (fs.statSync(this.basePath).isDirectory()) {
+            this.searchDirectory(this.basePath, regex, results, createdBefore, createdAfter, modifiedBefore, modifiedAfter);
+        } else {
+            this.searchFile(this.basePath, regex, results);
+        }
+        return results;
+    }
 
+    searchDirectory(dirPath, regex, results, createdBefore, createdAfter, modifiedBefore, modifiedAfter) {
+        const items = fs.readdirSync(dirPath);
+        items.forEach(item => {
+            const fullPath = path.join(dirPath, item);
+            const stats = fs.statSync(fullPath);
             if (stats.isDirectory()) {
-                searchDirectory(filePath);
+                this.searchDirectory(fullPath, regex, results, createdBefore, createdAfter, modifiedBefore, modifiedAfter);
             } else {
-                let match = true;
-
-                if (regex) {
-                    const content = fs.readFileSync(filePath, 'utf-8');
-                    match = regex.test(content);
-                }
-
-                if (createdBefore && stats.birthtime >= createdBefore) {
-                    match = false;
-                }
-
-                if (createdAfter && stats.birthtime <= createdAfter) {
-                    match = false;
-                }
-
-                if (modifiedBefore && stats.mtime >= modifiedBefore) {
-                    match = false;
-                }
-
-                if (modifiedAfter && stats.mtime <= modifiedAfter) {
-                    match = false;
-                }
-
-                if (match) {
-                    searchResults.push(filePath);
-                }
+                this.searchFile(fullPath, regex, results);
             }
         });
-    };
+    }
 
-    searchDirectory(dir);
-    return searchResults;
-};
+    searchFile(filePath, regex, results) {
+        const content = fs.readFileSync(filePath, 'utf8');
+        if (regex && regex.test(content)) {
+            results.push({ filePath, matches: content.match(regex) });
+        }
+    }
+}
+
+export default FileSearcher;
