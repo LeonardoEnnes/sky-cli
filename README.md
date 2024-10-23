@@ -48,12 +48,14 @@ git clone https://github.com/LeonardoEnnes/sky-cli.git
 ```
 npm install
 ```
-
-After that you are ready to go.
-
 ## How to use the CLI
 
-**Step 1:** Go to the repository folder open the terminal and run:
+**Step 1:** Go to the repository folder, open the terminal, and navigate to the src folder.
+```
+cd src
+```
+
+**Step 2:** Write this command to start the CLI:
 ```
 node index.js
 ```
