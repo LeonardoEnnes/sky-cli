@@ -60,7 +60,10 @@ cd src
 node index.js
 ```
 
-**Step 2:** Select a command from the list. You will be prompted with an autocomplete list of commands. Start typing the command you want to execute and select it from the list. The available commands are:
+**Step 3:** Select a command from the list. You will be prompted with an autocomplete list of commands. Start typing the command you want to execute and select it from the list. <br> 
+
+#### The available commands are:
+- help
 - request
 - monitor
 - logs
@@ -72,8 +75,9 @@ node index.js
 - search
 - convert-format
 
-**Step 3:** After selecting a command, you will be prompted to enter the required parameters for that command. For example:
-- For read-file, you will need to provide the path to the --file.
+<br>
+
+**Step 4:** If you need instructions on how to use certain commands, we recommend using the **help** command. This command will provide you with instructions on how to properly use the other commands.
 
 ## How to use the convert-format command
 The convert-format command is used to convert the format of a file. You can convert the format of a file from json to xml, csv, or vice versa. You can also filter and transform the data.
