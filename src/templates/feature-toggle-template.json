@@ -1,0 +1,17 @@
+{
+    "name": "feature-toggle-template",
+    "directories": [
+        "config",
+        "controllers",
+        "models",
+        "views"
+    ],
+    "files": {
+        "config/featureToggles.js": "// config/featureToggles.js\nexport const featureToggles = {\n    newFeature: true,\n    betaFeature: false,\n};",
+        "controllers/featureController.js": "// controllers/featureController.js\nimport { isFeatureEnabled } from '../models/featureModel.js';\nimport { renderFeature } from '../views/featureView.js';\n\nexport const handleFeatureRequest = (featureName) => {\n    if (isFeatureEnabled(featureName)) {\n        renderFeature(featureName);\n    } else {\n        console.log(`Feature ${featureName} is disabled.`);\n    }\n};",
+        "models/featureModel.js": "// models/featureModel.js\nimport { featureToggles } from '../config/featureToggles.js';\n\nexport const isFeatureEnabled = (featureName) => {\n    return featureToggles[featureName] || false;\n};",
+        "views/featureView.js": "// views/featureView.js\nexport const renderFeature = (featureName) => {\n    console.log(`Rendering feature: ${featureName}`);\n};",
+        "index.js": "// index.js\nimport { handleFeatureRequest } from './controllers/featureController.js';\n\nconst requestedFeature = 'newFeature';\nhandleFeatureRequest(requestedFeature);",
+        "package.json": "{\n    \"name\": \"feature-toggle-template\",\n    \"version\": \"1.0.0\",\n    \"description\": \"A template for implementing feature toggles.\",\n    \"main\": \"index.js\",\n    \"scripts\": {\n        \"start\": \"node index.js\"\n    }\n}"
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "name": "landing-page-template",
+    "directories": [
+        "assets",
+        "components",
+        "assets/css",
+        "assets/js",
+        "assets/images"
+    ],
+    "files": {
+        "assets/css/styles.css": "/* assets/css/styles.css */\nbody {\n    font-family: Arial, sans-serif;\n    margin: 0;\n    padding: 0;\n}\n.header, .footer {\n    background-color: #333;\n    color: white;\n    text-align: center;\n    padding: 1em 0;\n}\n.hero {\n    background: url('../images/hero-bg.jpg') no-repeat center center;\n    height: 400px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    color: white;\n}",
+        "assets/js/scripts.js": "// assets/js/scripts.js\ndocument.addEventListener('DOMContentLoaded', () => {\n    console.log('Landing page loaded');\n});",
+        "components/header.html": "<!-- components/header.html -->\n<header class=\"header\">\n    <h1>Welcome to Our Landing Page</h1>\n</header>",
+        "components/footer.html": "<!-- components/footer.html -->\n<footer class=\"footer\">\n    <p>&copy; 2023 Your Company. All rights reserved.</p>\n</footer>",
+        "components/hero.html": "<!-- components/hero.html -->\n<div class=\"hero\">\n    <h2>Your Success Starts Here</h2>\n    <p>Join us today and take the first step towards your goals!</p>\n</div>",
+        "index.html": "<!-- index.html -->\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <link rel=\"stylesheet\" href=\"assets/css/styles.css\">\n    <title>Landing Page</title>\n</head>\n<body>\n    <div id=\"header\"></div>\n    <div id=\"hero\"></div>\n    <div id=\"footer\"></div>\n    <script src=\"assets/js/scripts.js\"></script>\n    <script>\n        document.getElementById('header').innerHTML = fetch('components/header.html').then(res => res.text());\n        document.getElementById('hero').innerHTML = fetch('components/hero.html').then(res => res.text());\n        document.getElementById('footer').innerHTML = fetch('components/footer.html').then(res => res.text());\n    </script>\n</body>\n</html>",
+        "package.json": "{\n    \"name\": \"landing-page-template\",\n    \"version\": \"1.0.0\",\n    \"description\": \"A template for an advanced landing page.\",\n    \"main\": \"index.html\",\n    \"scripts\": {\n        \"start\": \"live-server\"\n    },\n    \"devDependencies\": {\n        \"live-server\": \"^1.2.1\"\n    }\n}"
+    }
+}
