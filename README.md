@@ -11,6 +11,11 @@ Sky CLI is a powerful and versatile command-line interface designed for develope
 3. [How to Use the CLI](#how-to-use-the-cli)
 4. [Project Structure](#project-structure)
 
+## Here is a demo of how the project works:
+
+![Demo](./assets/demo.gif)
+
+---
 ### 🚀 Features
 1. #### File Management
     - **File and Folder Listing:** Interactively list files and directories with filters for file type, size, or creation date.
