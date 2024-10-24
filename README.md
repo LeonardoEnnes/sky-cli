@@ -2,16 +2,17 @@
 Sky CLI is a powerful and versatile command-line interface designed for developers who need to streamline their workflow. It provides a comprehensive suite of tools for managing APIs, handling file operations, manipulating data, and using templates to simplify repetitive tasks. Whether you’re automating file operations, making API requests, or processing data, sky-cli has you covered!
 
 ## Table of Contents
-1. [Features](#-features)
+1. [Quick Overview](#-Quick-Overview)
+2. [Features](#-features)
     - [File Management](#file-management)
     - [API Interaction](#api-interaction)
     - [Data Manipulation](#data-manipulation)
     - [Template Creation](#template-creation)
-2. [How to Install the CLI](#how-to-install-the-cli)
-3. [How to Use the CLI](#how-to-use-the-cli)
-4. [Project Structure](#project-structure)
+3. [How to Install the CLI](#how-to-install-the-cli)
+4. [How to Use the CLI](#how-to-use-the-cli)
+5. [Project Structure](#project-structure)
 
-## Here is a demo of how the project works:
+## Quick Overview:
 
 ![Demo](./assets/demo.gif)
 
@@ -68,6 +69,7 @@ node index.js
 
 #### The available commands are:
 - help
+- create-template
 - request
 - monitor
 - logs
