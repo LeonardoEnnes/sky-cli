@@ -1,0 +1,17 @@
+{
+    "name": "telegram-bot-template",
+    "directories": [
+        "controllers",
+        "models",
+        "views",
+        "config"
+    ],
+    "files": {
+        "controllers/botController.js": "// controllers/botController.js\nimport { sendMessage } from '../views/botView.js';\nimport { getBotData } from '../models/botModel.js';\n\nexport const handleMessage = (message) => {\n    const response = getBotData(message);\n    sendMessage(response);\n};",
+        "models/botModel.js": "// models/botModel.js\nexport const getBotData = (message) => {\n    return `You said: ${message}`;\n};",
+        "views/botView.js": "// views/botView.js\nexport const sendMessage = (message) => {\n    console.log(`Sending message: ${message}`);\n};",
+        "config/config.js": "// config/config.js\nexport const TELEGRAM_TOKEN = 'YOUR_TELEGRAM_BOT_TOKEN';",
+        "index.js": "// index.js\nimport { handleMessage } from './controllers/botController.js';\n\nconst receivedMessage = 'Hello, bot!';\nhandleMessage(receivedMessage);",
+        "package.json": "{\n    \"name\": \"telegram-bot-template\",\n    \"version\": \"1.0.0\",\n    \"description\": \"A template for a Telegram bot using MVC architecture.\",\n    \"main\": \"index.js\",\n    \"scripts\": {\n        \"start\": \"node index.js\"\n    },\n    \"dependencies\": {\n        \"node-telegram-bot-api\": \"^0.50.0\"\n    }\n}"
+    }
+}
