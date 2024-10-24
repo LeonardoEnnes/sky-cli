@@ -1,5 +1,3 @@
-// @desc: add Filtering and Sorting feat somewhere (maybe put it in another file, i think theres no need to put in this file)
-
 import { parse as json2csv } from 'json2csv';
 import { parseStringPromise as xml2js, Builder as js2xml } from 'xml2js';
 import { promises as fs } from 'fs';
