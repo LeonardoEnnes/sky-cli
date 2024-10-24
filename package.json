@@ -1,7 +1,7 @@
 {
 	"name": "sky-cli",
 	"description": "An cli tool to help devs",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"license": "UNLICENSED",
 	"type": "module",
 	"bin": {
