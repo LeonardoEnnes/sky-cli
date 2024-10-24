@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import cli from './utils/cli.js';
 import init from './utils/init.js';
 import log from './utils/log.js';
@@ -38,17 +36,22 @@ class CommandHandler {
             new Command('convert-format', ['--input-file', '--output-file', '--input-format', '--output-format'], this.handleConvertFormat.bind(this), 'Convert a file from one format to another.')
         ];
 
-        // Vinculando o método printDifferences
         this.printDifferences = this.printDifferences.bind(this);
     }
 
 	showHelp() {
         console.log('Available Commands:');
         this.commands.forEach(command => {
-            console.log(`  ${command.name}: ${command.description}`);
+            // Style the command name
+            console.log(`  ${chalk.cyan.bold(command.name)}: ${chalk.white(command.description)}`);
+            
+            // If the command has parameters, display them with some additional styling
             if (command.params.length > 0) {
-                console.log(`    Parameters: ${command.params.join(', ')}`);
+                console.log(`    ${chalk.magenta('Parameters:')} ${chalk.yellow(command.params.join(', '))}`);
             }
+    
+            // Add a blank line after each command for better readability
+            console.log();
         });
     }
 
