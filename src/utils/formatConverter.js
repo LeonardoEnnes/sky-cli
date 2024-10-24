@@ -1,5 +1,4 @@
-// @desc: the filter and transform functions were removed from the code due to errors during the execution
-// @desc: filter and transform functions will be implemented later
+// @desc: add Filtering and Sorting feat somewhere (maybe put it in another file, i think theres no need to put in this file)
 
 import { parse as json2csv } from 'json2csv';
 import { parseStringPromise as xml2js, Builder as js2xml } from 'xml2js';
