@@ -28,7 +28,7 @@ Sky CLI is a powerful and versatile command-line interface designed for develope
 
     - **API Logs:** Store and view logs of previous API requests for debugging and analysis.
 3. #### Data Manipulation
-    - **Format Conversion:** Convert between data formats like JSON, XML, and CSV with options for filtering and transforming data.
+    - **Format Conversion:** Convert between data formats like JSON, XML, and CSV.
 4. #### Template Creation
     - **Project Structure Generation:** Quickly generate project structures for popular frameworks or libraries with initial files (e.g., index.js, package.json).
     - **Custom Templates:** Create and store personalized templates to speed up project generation.
