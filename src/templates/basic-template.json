@@ -1,0 +1,13 @@
+{
+    "name": "Basic Template",
+    "files": {
+        "index.js": "console.log('Hello, World!');",
+        "package.json": "{\n  \"name\": \"my-app\",\n  \"version\": \"1.0.0\"\n}",
+        "README.md": "# My App\n\nThis is a basic template."
+    },
+    "directories": [
+        "src",
+        "src/components",
+        "src/utils"
+    ]
+}

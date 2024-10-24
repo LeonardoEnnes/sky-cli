@@ -8,6 +8,7 @@ import FormatConverter from './utils/formatConverter.js';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
 import autocomplete from 'inquirer-autocomplete-prompt';
+import TemplateManager from './utils/templateManager.js';
 
 inquirer.registerPrompt('autocomplete', autocomplete);
 
@@ -33,7 +34,8 @@ class CommandHandler {
             new Command('list-files', ['--dir'], this.handleListFiles.bind(this), 'List files and folders in a directory.'),
             new Command('compare-files', ['--file1', '--file2'], this.handleCompareFiles.bind(this), 'Compare two files and show differences.'),
             new Command('search', ['--dir', '--regex', '--created-before', '--created-after', '--modified-before', '--modified-after'], this.handleSearch.bind(this), 'Search for files matching criteria.'),
-            new Command('convert-format', ['--input-file', '--output-file', '--input-format', '--output-format'], this.handleConvertFormat.bind(this), 'Convert a file from one format to another.')
+            new Command('convert-format', ['--input-file', '--output-file', '--input-format', '--output-format'], this.handleConvertFormat.bind(this), 'Convert a file from one format to another.'),
+            new Command('create-template', ['--template', '--target'], this.handleCreateTemplate.bind(this), 'Create a project structure from a template.')
         ];
 
         this.printDifferences = this.printDifferences.bind(this);
@@ -137,6 +139,19 @@ class CommandHandler {
 
         const converter = new FormatConverter();
         await converter.convert(inputFile, outputFile, inputFormat, outputFormat);
+    }
+
+    async handleCreateTemplate(params) {
+        const templateName = params['--template'];
+        const targetDir = params['--target'] || process.cwd(); // Default to current directory
+
+        const templateManager = new TemplateManager('./templates');
+        try {
+            const template = templateManager.loadTemplate(templateName);
+            templateManager.createTemplateStructure(template, targetDir);
+        } catch (error) {
+            console.error(error.message);
+        }
     }
 
     printDifferences(differences) {
