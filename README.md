@@ -9,8 +9,6 @@ Sky CLI is a powerful and versatile command-line interface designed for develope
     - [Template Creation](#template-creation)
 2. [How to Install the CLI](#how-to-install-the-cli)
 3. [How to Use the CLI](#how-to-use-the-cli)
-4. [How to Use the convert-format Command](#how-to-use-the-convert-format-command)
-5. [How to Use the search Command](#how-to-use-the-search-command)
 
 
 ### 🚀 Features
@@ -77,49 +75,3 @@ node index.js
 <br>
 
 **Step 4:** If you need instructions on how to use certain commands, we recommend using the **help** command. This command will provide you with instructions on how to properly use the other commands.
-
-## How to use the convert-format command
-The convert-format command is used to convert the format of a file. You can convert the format of a file from json to xml, csv, or vice versa. You can also filter and transform the data.
-
-- Select the convert-format command from the autocomplete list.
-```
-   ? What do you want to do? convert-format
-``` 
-
-- Provide Parameters:
-```
-? Enter the input file path: ./input.json
-? Enter the output file path: ./output.xml
-? Enter the input format: json
-? Enter the output format: xml
-? Enter the filter: "key=value"
-? Enter the transform: "key=toUpperCase"
-```
-
- ## How to use the search command
- The search command is used to search for words in files in a directory that match a specific regex pattern. You can also filter the search by creation and modification date.
-
-- Select the search command from the autocomplete list.
-```
-   ? What do you want to do? search
-``` 
-
-- Provide Parameters:
-```
-? Enter the directory path: ./
-? Enter the regex pattern: "example"
-? Enter the creation date before: 2024-01-01
-? Enter the creation date after: 2024-01-31
-? Enter the modification date before: 2024-01-01
-? Enter the modification date after: 2024-01-31
-```
-
-- View the results:
-```
-   Results:
-   - ./file1.txt
-   - ./file2.txt
-   - ./file3.txt
-``` 
-
-----
