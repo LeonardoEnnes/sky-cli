@@ -9,6 +9,7 @@ import chalk from 'chalk';
 import inquirer from 'inquirer';
 import autocomplete from 'inquirer-autocomplete-prompt';
 import TemplateManager from './utils/templateManager.js';
+import fs from 'fs';
 
 inquirer.registerPrompt('autocomplete', autocomplete);
 
@@ -35,7 +36,7 @@ class CommandHandler {
             new Command('compare-files', ['--file1', '--file2'], this.handleCompareFiles.bind(this), 'Compare two files and show differences.'),
             new Command('search', ['--dir', '--regex', '--created-before', '--created-after', '--modified-before', '--modified-after'], this.handleSearch.bind(this), 'Search for files matching criteria.'),
             new Command('convert-format', ['--input-file', '--output-file', '--input-format', '--output-format'], this.handleConvertFormat.bind(this), 'Convert a file from one format to another.'),
-            new Command('create-template', ['--template', '--target'], this.handleCreateTemplate.bind(this), 'Create a project structure from a template.')
+            new Command('create-template', ['--target'], this.handleCreateTemplate.bind(this), 'Create a project structure from a template.')
         ];
 
         this.printDifferences = this.printDifferences.bind(this);
@@ -142,11 +143,24 @@ class CommandHandler {
     }
 
     async handleCreateTemplate(params) {
-        const templateName = params['--template'];
+        // Remove the template parameter from params
         const targetDir = params['--target'] || process.cwd(); // Default to current directory
 
         const templateManager = new TemplateManager('./templates');
         try {
+            // Get the list of available templates
+            const availableTemplates = fs.readdirSync(templateManager.templatesDir)
+                .filter(file => file.endsWith('.json'))
+                .map(file => file.replace('.json', ''));
+
+            // Prompt user to select a template
+            const { templateName } = await inquirer.prompt([{
+                type: 'list',
+                name: 'templateName',
+                message: 'Select a template to create: (Use arrow keys)',
+                choices: availableTemplates
+            }]);
+
             const template = templateManager.loadTemplate(templateName);
             templateManager.createTemplateStructure(template, targetDir);
         } catch (error) {
