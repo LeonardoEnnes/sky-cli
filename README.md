@@ -9,7 +9,7 @@ Sky CLI is a powerful and versatile command-line interface designed for develope
     - [Template Creation](#template-creation)
 2. [How to Install the CLI](#how-to-install-the-cli)
 3. [How to Use the CLI](#how-to-use-the-cli)
-
+4. [Project Structure](#project-structure)
 
 ### 🚀 Features
 1. #### File Management
@@ -27,8 +27,10 @@ Sky CLI is a powerful and versatile command-line interface designed for develope
     - **API Monitoring:** Periodically ping API endpoints to track status, response times, and potential errors.
 
     - **API Logs:** Store and view logs of previous API requests for debugging and analysis.
+
 3. #### Data Manipulation
     - **Format Conversion:** Convert between data formats like JSON, XML, and CSV.
+
 4. #### Template Creation
     - **Project Structure Generation:** Quickly generate project structures for popular frameworks or libraries with initial files (e.g., index.js, package.json).
     - **Custom Templates:** Create and store personalized templates to speed up project generation.
@@ -44,6 +46,7 @@ git clone https://github.com/LeonardoEnnes/sky-cli.git
 ```
 npm install
 ```
+
 ## How to use the CLI
 
 **Step 1:** Go to the repository folder, open the terminal, and navigate to the src folder.
@@ -74,3 +77,27 @@ node index.js
 <br>
 
 **Step 4:** If you need instructions on how to use certain commands, we recommend using the **help** command. This command will provide you with instructions on how to properly use the other commands.
+
+## Project Structure
+Here is the structure of the **sky-cli** project:
+
+```
+sky-cli/
+├── src/
+│   ├── index.js                # Main entry point for the CLI
+│   ├── utils/                  # Utility functions and classes
+│   │   ├── api.js              # API interaction and logging
+│   │   ├── cli.js              # CLI command handling
+│   │   ├── fileManager.js       # File operations management
+│   │   ├── formatConverter.js    # Data format conversion
+│   │   ├── init.js              # Initialization and welcome message
+│   │   ├── log.js               # Logging utility
+│   │   ├── search.js            # File searching functionality
+│   │   └── templateManager.js    # Template management
+│   └── templates/               # Directory for storing templates
+│       ├── landing-page-template.json  # JSON template for landing page
+│       ├── feature-toggle-template.json # JSON template for feature toggles
+│       └── ...                  # Other templates
+├── package.json                 # Project metadata and dependencies
+└── README.md                    # Project documentation
+```
