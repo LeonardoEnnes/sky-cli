@@ -14,7 +14,7 @@ Sky CLI is a powerful and versatile command-line interface designed for develope
 
 ## Quick Overview:
 
-<img src="./assets/demo.gif" alt="Demo" width="800" height="355" />
+<img src="./assets/demo.gif" alt="Demo" width="800" height="427" />
 
 ---
 ### 🚀 Features
