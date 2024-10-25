@@ -18,7 +18,7 @@ class TemplateManager {
     createTemplateStructure(template, targetDir) {
         // Define o diretório de destino como a área de trabalho do usuário
         const desktopDir = path.join(os.homedir(), 'OneDrive', 'Área de Trabalho'); // Caminho para a área de trabalho
-        const finalTargetDir = path.join(desktopDir, template.name); // Usar o nome do template como subdiretório
+        const finalTargetDir = path.join(desktopDir, targetDir); // corrige bug do nome 
 
         // Create directories
         template.directories.forEach(dir => {
